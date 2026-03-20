@@ -1,0 +1,63 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap');
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+/* ─── Design tokens ─────────────────────────────────────────────────────────── */
+@theme {
+  --color-canvas:  #FAF9F5;
+  --color-accent:  #D97757;
+  --color-subtle:  #E5E2D9;
+  --color-ink:     #2D2926;
+  --color-surface: #ffffff;   /* card/panel backgrounds — theme-aware */
+
+  /* Contribution heatmap levels */
+  --color-heat-0: #E5E2D9;
+  --color-heat-1: #f7d4c2;
+  --color-heat-2: #f0a87c;
+  --color-heat-3: #e58040;
+  --color-heat-4: #D97757;
+
+  --font-serif: "Cormorant Garamond", ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+  --font-sans:  "Inter", ui-sans-serif, system-ui, sans-serif;
+}
+
+/* ─── Dark mode overrides ────────────────────────────────────────────────────── */
+[data-theme="dark"] {
+  --color-canvas:  #1A1816;
+  --color-ink:     #EDE9E3;
+  --color-subtle:  #2E2B27;
+  --color-accent:  #E88A6B;
+  --color-surface: #252220;
+
+  --color-heat-0: #2E2B27;
+  --color-heat-1: #5a3022;
+  --color-heat-2: #9a4e32;
+  --color-heat-3: #c46845;
+  --color-heat-4: #E88A6B;
+
+  color-scheme: dark;
+}
+
+/* ─── Force admin section to always use light theme ─────────────────────────── */
+/* Applied to AdminLayout root — overrides data-theme on html */
+.admin-wrapper {
+  --color-canvas:  #FAF9F5;
+  --color-ink:     #2D2926;
+  --color-subtle:  #E5E2D9;
+  --color-accent:  #D97757;
+  --color-surface: #ffffff;
+  color-scheme: light;
+}
+
+/* ─── Base styles ─────────────────────────────────────────────────────────────── */
+body {
+  background-color: var(--color-canvas);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-serif);
+}

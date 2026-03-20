@@ -1,0 +1,15 @@
+node_modules/
+build/
+dist/
+coverage/
+.DS_Store
+*.log
+.env*
+!.env.example
+
+# Local Claude Code workspace files (contain local dev scripts with DB credentials)
+.claude/
+
+# SQLite database files (legacy / local dev artefact)
+*.db
+*.sqlite
