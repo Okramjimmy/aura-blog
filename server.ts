@@ -1,3 +1,4 @@
+import 'dotenv/config';
 import express, { Request, Response, NextFunction } from 'express';
 import { createServer as createViteServer } from 'vite';
 import path from 'path';
@@ -13,7 +14,7 @@ import githubRoutes from './server/routes/github.ts';
 async function startServer() {
   const app = express();
   app.use(express.json());
-  const PORT = 3000;
+  const PORT = parseInt(process.env.PORT || '3000', 10);
 
   // Initialize PostgreSQL Database
   await initDb();
