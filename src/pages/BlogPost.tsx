@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { ArrowLeft, Share2, Bookmark } from 'lucide-react';
 import { Link, useParams } from 'react-router-dom';
+import Seo, { SITE_URL, AUTHOR } from '../components/Seo';
 
 interface Block {
   type: 'h1' | 'h2' | 'h3' | 'paragraph' | 'blockquote' | 'image';
@@ -109,8 +110,32 @@ export default function BlogPost() {
   const bodyBlocks = post.content.filter(b => b.type !== 'h1');
   const readTime = estimateReadTime(post.content);
 
+  const articleJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    headline: post.title,
+    description: post.excerpt || '',
+    url: `${SITE_URL}/blog/${post.slug}`,
+    datePublished: post.created_at,
+    dateModified: post.created_at,
+    author: { '@type': 'Person', name: AUTHOR, url: `${SITE_URL}/about` },
+    publisher: { '@type': 'Person', name: AUTHOR, url: SITE_URL },
+    image: `https://picsum.photos/seed/${post.slug}/1200/630`,
+    articleSection: post.category,
+    mainEntityOfPage: { '@type': 'WebPage', '@id': `${SITE_URL}/blog/${post.slug}` },
+  };
+
   return (
     <div className="relative">
+      <Seo
+        title={post.title}
+        description={post.excerpt || undefined}
+        canonical={`/blog/${post.slug}`}
+        ogType="article"
+        ogImage={`https://picsum.photos/seed/${post.slug}/1200/630`}
+        article={{ publishedTime: post.created_at, tags: [post.category] }}
+        jsonLd={articleJsonLd}
+      />
       <div
         className="fixed top-0 left-0 h-1 bg-accent z-[60] transition-all duration-150 ease-out"
         style={{ width: `${scrollProgress * 100}%` }}

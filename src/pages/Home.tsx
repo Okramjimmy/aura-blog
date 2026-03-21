@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { ArrowRight, Instagram, Twitter, Linkedin } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import Seo, { SITE_URL, AUTHOR } from '../components/Seo';
 
 interface Post {
   id: string;
@@ -36,8 +37,26 @@ export default function Home() {
   const featured = posts[0];
   const latest = posts.slice(1, 4);
 
+  const websiteJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: 'Aura',
+    url: SITE_URL,
+    author: {
+      '@type': 'Person',
+      name: AUTHOR,
+      url: `${SITE_URL}/about`,
+    },
+    description: 'Personal blog and portfolio of Okram Jimmy Singh — essays on software engineering, machine learning, design, and building with intention.',
+  };
+
   return (
     <>
+      <Seo
+        description="Personal blog and portfolio of Okram Jimmy Singh — essays on software engineering, machine learning, design, and building with intention."
+        canonical="/"
+        jsonLd={websiteJsonLd}
+      />
       {/* Hero Section */}
       <section className="px-4 md:px-8 lg:px-12 py-12 md:py-20">
         <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-center">

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { ArrowLeft } from 'lucide-react';
 import { Link, useParams } from 'react-router-dom';
+import Seo, { SITE_URL, AUTHOR } from '../components/Seo';
 
 interface Project {
   id: string;
@@ -54,8 +55,25 @@ export default function ProjectDetail() {
     );
   }
 
+  const projectJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'SoftwareApplication',
+    name: project.title,
+    description: project.description,
+    author: { '@type': 'Person', name: AUTHOR, url: `${SITE_URL}/about` },
+    applicationCategory: project.category,
+    keywords: Array.isArray(project.tags) ? project.tags.join(', ') : project.tags,
+  };
+
   return (
     <article className="px-4 md:px-8 lg:px-12 py-12 md:py-20 max-w-4xl mx-auto">
+      <Seo
+        title={project.title}
+        description={project.description}
+        canonical={`/projects/${project.id}`}
+        ogImage={`https://picsum.photos/seed/${project.image_seed || project.id}/1200/630`}
+        jsonLd={projectJsonLd}
+      />
       <Link to="/projects" className="inline-flex items-center gap-2 text-sm font-medium uppercase tracking-widest text-ink/60 hover:text-accent transition-colors mb-12">
         <ArrowLeft size={16} /> Back to Projects
       </Link>

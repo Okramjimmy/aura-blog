@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Filter } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import Seo from '../components/Seo';
 
 interface Project {
   id: string;
@@ -36,6 +37,11 @@ export default function Projects() {
 
   return (
     <div className="px-4 md:px-8 lg:px-12 py-12 md:py-20 max-w-7xl mx-auto">
+      <Seo
+        title="Projects"
+        description="A portfolio of selected projects in machine learning, data engineering, and full-stack web development by Okram Jimmy Singh."
+        canonical="/projects"
+      />
       <div className="text-center mb-16">
         <h1 className="text-5xl md:text-6xl font-serif text-ink mb-6">Projects</h1>
         <p className="text-lg text-ink/70 font-light max-w-2xl mx-auto">

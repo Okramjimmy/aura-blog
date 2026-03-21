@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import Seo from '../components/Seo';
 
 const EFFECTIVE_DATE = 'March 20, 2026';
 const SITE_NAME = 'Aura';
@@ -45,6 +46,7 @@ const TOC = [
 export default function TermsOfService() {
   return (
     <div className="px-4 md:px-8 lg:px-12 py-12 md:py-20 max-w-7xl mx-auto">
+      <Seo title="Terms of Service" description="Terms of Service for Aura — your rights and responsibilities when using this site." canonical="/terms" noindex />
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
 
         {/* Sidebar TOC */}

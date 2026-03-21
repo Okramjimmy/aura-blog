@@ -3,6 +3,7 @@ import {
   Star, GitFork, ExternalLink, Clock, BookOpen,
   RefreshCw, AlertCircle, Github, Filter, Search,
 } from 'lucide-react';
+import Seo from '../components/Seo';
 import { apiJson } from '../lib/api';
 
 // ─── Types ────────────────────────────────────────────────────────────────────
@@ -297,6 +298,11 @@ export default function GitHubPage() {
 
   return (
     <div className="max-w-5xl mx-auto px-4 md:px-8 lg:px-12 py-16 md:py-20">
+      <Seo
+        title="GitHub"
+        description="Open source projects and contribution activity by Okram Jimmy Singh. Repositories in machine learning, data engineering, and full-stack development."
+        canonical="/github"
+      />
 
       {/* ── Page heading ───────────────────────────────────────────────────── */}
       <div className="mb-16">

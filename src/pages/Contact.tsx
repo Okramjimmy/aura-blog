@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Instagram, Twitter, Linkedin, Mail, MapPin, CheckCircle, AlertCircle, Loader2 } from 'lucide-react';
+import Seo from '../components/Seo';
 
 interface FormData {
   name: string;
@@ -42,6 +43,11 @@ export default function Contact() {
 
   return (
     <div className="min-h-[80vh] flex flex-col justify-center px-4 md:px-8 lg:px-12 py-20 max-w-5xl mx-auto w-full">
+      <Seo
+        title="Contact"
+        description="Get in touch with Okram Jimmy Singh — open to collaborations, consulting, research discussions, and interesting conversations."
+        canonical="/contact"
+      />
       <div className="text-center mb-16">
         <h1 className="text-5xl md:text-7xl font-serif text-ink mb-6">Say Hello.</h1>
         <p className="text-lg text-ink/70 font-light max-w-xl mx-auto leading-relaxed">

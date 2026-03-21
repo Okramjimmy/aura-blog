@@ -3,8 +3,33 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Primary SEO — overridden per-page by React 19 metadata hoisting -->
     <title>Aura — Okram Jimmy Singh</title>
-    <!-- Set theme before first paint to prevent flash of wrong theme -->
+    <meta name="description" content="Personal blog and portfolio of Okram Jimmy Singh — essays on software engineering, machine learning, design, and building with intention." />
+    <meta name="author" content="Okram Jimmy Singh" />
+    <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large" />
+    <link rel="canonical" href="https://aura.okram.co.in" />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Aura — Okram Jimmy Singh" />
+    <meta property="og:description" content="Personal blog and portfolio of Okram Jimmy Singh — essays on software engineering, machine learning, design, and building with intention." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://aura.okram.co.in" />
+    <meta property="og:image" content="https://aura.okram.co.in/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:site_name" content="Aura" />
+    <meta property="og:locale" content="en_US" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Aura — Okram Jimmy Singh" />
+    <meta name="twitter:description" content="Personal blog and portfolio of Okram Jimmy Singh — essays on software engineering, machine learning, design, and building with intention." />
+    <meta name="twitter:image" content="https://aura.okram.co.in/og-image.png" />
+    <meta name="twitter:creator" content="@okramjimmy" />
+
+    <!-- Prevent flash of wrong theme before React loads -->
     <script>
       (function () {
         var saved = localStorage.getItem('theme');
@@ -18,4 +43,3 @@
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
-

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Mail, MapPin, ExternalLink } from 'lucide-react';
+import Seo, { SITE_URL, AUTHOR } from '../components/Seo';
 
 const experience = [
   {
@@ -67,8 +68,26 @@ const skillGroups = [
 ];
 
 export default function About() {
+  const personJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Person',
+    name: AUTHOR,
+    url: `${SITE_URL}/about`,
+    jobTitle: 'System Engineer & ML Practitioner',
+    worksFor: { '@type': 'Organization', name: 'IIT Guwahati' },
+    alumniOf: { '@type': 'CollegeOrUniversity', name: 'Mizoram University' },
+    knowsAbout: ['Machine Learning', 'NLP', 'Data Engineering', 'Full-Stack Development', 'React', 'PostgreSQL'],
+    sameAs: ['https://github.com/Okramjimmy'],
+  };
+
   return (
     <div className="px-4 md:px-8 lg:px-12 py-12 md:py-20 max-w-7xl mx-auto">
+      <Seo
+        title="About"
+        description="Computer engineering graduate with 3+ years at IIT Guwahati in machine learning, data engineering, and full-stack web development. Currently building ERP systems and ML-powered tools."
+        canonical="/about"
+        jsonLd={personJsonLd}
+      />
 
       {/* Hero */}
       <section className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center mb-24">

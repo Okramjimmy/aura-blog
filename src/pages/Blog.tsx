@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useMemo, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { LayoutGrid, List, Search, X, ChevronLeft, ChevronRight } from 'lucide-react';
+import Seo from '../components/Seo';
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 interface Block { type: string; text?: string; }
@@ -258,6 +259,11 @@ export default function Blog() {
 
   return (
     <div ref={topRef} className="px-4 md:px-8 lg:px-12 py-12 md:py-20 max-w-6xl mx-auto">
+      <Seo
+        title="Journal"
+        description="Essays and reflections on software engineering, machine learning, design, and building with intention. By Okram Jimmy Singh."
+        canonical="/blog"
+      />
 
       {/* ── Page Header ─────────────────────────────────────────────────────── */}
       <div className="text-center mb-12">
