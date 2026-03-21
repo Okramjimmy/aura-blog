@@ -7,7 +7,7 @@ router.get('/', async (req: Request, res: Response) => {
   try {
     const pool = getDb();
 
-    const [postsR, projectsR, recentPostsR, recentProjectsR, contactsR, newslettersR] = await Promise.all([
+    const [postsR, projectsR, recentPostsR, recentProjectsR, contactsR, newslettersR, viewsR] = await Promise.all([
       pool.query(`
         SELECT COUNT(*) AS total,
           SUM(CASE WHEN is_published THEN 1 ELSE 0 END) AS published,
@@ -24,12 +24,21 @@ router.get('/', async (req: Request, res: Response) => {
       pool.query(`SELECT id, title, category, status, created_at FROM projects ORDER BY created_at DESC LIMIT 5`),
       pool.query(`SELECT COUNT(*) AS total, SUM(CASE WHEN NOT is_read THEN 1 ELSE 0 END) AS unread FROM contacts`),
       pool.query(`SELECT COUNT(*) AS total, SUM(CASE WHEN is_active THEN 1 ELSE 0 END) AS active FROM newsletters`),
+      pool.query(`
+        SELECT
+          COUNT(*) AS total,
+          SUM(CASE WHEN created_at >= CURRENT_DATE THEN 1 ELSE 0 END) AS today,
+          SUM(CASE WHEN created_at >= CURRENT_DATE - INTERVAL '7 days' THEN 1 ELSE 0 END) AS this_week,
+          COUNT(DISTINCT visitor_hash) AS unique_visitors
+        FROM page_views
+      `),
     ]);
 
     const p = postsR.rows[0];
     const pr = projectsR.rows[0];
     const c = contactsR.rows[0];
     const n = newslettersR.rows[0];
+    const v = viewsR.rows[0];
 
     res.json({
       posts: {
@@ -49,6 +58,12 @@ router.get('/', async (req: Request, res: Response) => {
       newsletters: {
         total: parseInt(n.total) || 0,
         active: parseInt(n.active) || 0,
+      },
+      views: {
+        total: parseInt(v.total) || 0,
+        today: parseInt(v.today) || 0,
+        this_week: parseInt(v.this_week) || 0,
+        unique_visitors: parseInt(v.unique_visitors) || 0,
       },
       recent_posts: recentPostsR.rows,
       recent_projects: recentProjectsR.rows,

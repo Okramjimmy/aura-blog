@@ -75,6 +75,15 @@ export async function initDb() {
     );
   `);
 
+  await pool.query(`
+    CREATE TABLE IF NOT EXISTS page_views (
+      id TEXT PRIMARY KEY DEFAULT gen_random_uuid()::text,
+      path TEXT NOT NULL,
+      visitor_hash TEXT,
+      created_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP
+    );
+  `);
+
   const { rows } = await pool.query('SELECT COUNT(*) as count FROM posts');
   if (parseInt(rows[0].count) === 0) {
     await seedPosts(pool);

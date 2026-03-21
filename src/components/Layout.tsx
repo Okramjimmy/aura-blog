@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect, useMemo } from 'react';
 import { Search, Menu, Mail, Github, CheckCircle, X, BookOpen, FolderOpen, ArrowRight, Sun, Moon } from 'lucide-react';
-import { Link, Outlet, useNavigate } from 'react-router-dom';
+import { Link, Outlet, useNavigate, useLocation } from 'react-router-dom';
 
 // ─── Theme hook ───────────────────────────────────────────────────────────────
 function useTheme() {
@@ -422,6 +422,16 @@ export default function Layout() {
   const [searchOpen, setSearchOpen] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const { theme, toggle: toggleTheme } = useTheme();
+  const location = useLocation();
+
+  // Track page view on every route change
+  useEffect(() => {
+    fetch('/api/v1/pageview', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ path: location.pathname }),
+    }).catch(() => {}); // silently ignore failures
+  }, [location.pathname]);
 
   return (
     <div className="min-h-screen flex flex-col">

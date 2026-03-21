@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 const EFFECTIVE_DATE = 'March 20, 2026';
 const SITE_NAME = 'Aura';
-const SITE_URL = 'https://aura.okramjimmy.com';
+const SITE_URL = 'https://aura.okram.co.in';
 const OWNER_NAME = 'Okram Jimmy Singh';
 const OWNER_EMAIL = 'okramjimmy@gmail.com';
 

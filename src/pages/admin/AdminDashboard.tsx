@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useCallback } from 'react';
-import { FileText, FolderOpen, CheckCircle, Clock, TrendingUp, Plus, RefreshCw, AlertCircle, Mail, Users } from 'lucide-react';
+import { FileText, FolderOpen, CheckCircle, Clock, TrendingUp, Plus, RefreshCw, AlertCircle, Mail, Users, Eye, Activity, CalendarDays } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { apiJson } from '../../lib/api';
 
@@ -8,6 +8,7 @@ interface Stats {
   projects: { total: number; published: number; draft: number };
   contacts: { total: number; unread: number };
   newsletters: { total: number; active: number };
+  views: { total: number; today: number; this_week: number; unique_visitors: number };
   recent_posts: { id: string; title: string; slug: string; category: string; is_published: boolean; created_at: string }[];
   recent_projects: { id: string; title: string; category: string; status: string; created_at: string }[];
 }
@@ -112,7 +113,15 @@ export default function AdminDashboard() {
         </div>
       </div>
 
-      {/* Stat Cards — 6 real stats */}
+      {/* Visitor Stats */}
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+        <StatCard label="Total Views"     value={s.views.total}          sub="all time"           icon={Eye}          color="bg-sky-50 text-sky-600" />
+        <StatCard label="Views Today"     value={s.views.today}          sub="since midnight"     icon={Activity}     color="bg-emerald-50 text-emerald-600" />
+        <StatCard label="Views This Week" value={s.views.this_week}      sub="last 7 days"        icon={CalendarDays} color="bg-indigo-50 text-indigo-600" />
+        <StatCard label="Unique Visitors" value={s.views.unique_visitors} sub="distinct IPs"      icon={Users}        color="bg-violet-50 text-violet-600" />
+      </div>
+
+      {/* Stat Cards */}
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mb-10">
         <StatCard label="Total Posts"     value={s.posts.total}        sub={`${s.posts.published} live`}       icon={FileText}    color="bg-canvas text-ink" />
         <StatCard label="Draft Posts"     value={s.posts.draft}        sub="unpublished"                        icon={Clock}       color="bg-amber-50 text-amber-600" />

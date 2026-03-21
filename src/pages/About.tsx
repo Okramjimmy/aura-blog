@@ -6,34 +6,40 @@ const experience = [
     role: 'System Engineer, R&D Section',
     org: 'IIT Guwahati',
     period: 'May 2025 – Present',
+    current: true,
     bullets: [
       'Developing an internal ERP system using the open-source Frappe Framework to streamline research project management, HR, and asset tracking.',
       'Customizing Frappe modules for workflow automation, role-based permissions, and reporting.',
       'Managing backend infrastructure, deployment pipelines, and database configurations.',
       'Implementing automation scripts for deployment, monitoring, and maintenance using Docker, Git, and shell scripting.',
     ],
+    tags: ['Frappe', 'Python', 'Docker', 'PostgreSQL', 'Shell'],
   },
   {
     role: 'Assistant Project Engineer, CLST',
     org: 'IIT Guwahati',
     period: 'July 2024 – May 2025',
+    current: false,
     bullets: [
       'Led development of an AI-assisted legal translation system using NLP and Facebook\'s NLLB model, fine-tuned for machine translation of court judgments.',
       'Built and fine-tuned ML models for translation, text classification, LLMs, and named entity recognition.',
       'Deployed models on-premise with ReactJS, Next.js, MongoDB, PostgreSQL, Redis, Docker, and FastAPI.',
       'Implemented a web-based Word document editor with rich editing and formatting capabilities.',
     ],
+    tags: ['NLP', 'FastAPI', 'React', 'Next.js', 'MongoDB', 'Redis', 'Docker'],
   },
   {
     role: 'Project Associate – I, OSINT Lab',
     org: 'IIT Guwahati',
     period: 'January 2022 – June 2024',
+    current: false,
     bullets: [
       'Contributed to Vishleshakee 2, a social media analytics platform with sentiment analysis and web scraping capabilities.',
       'Used PySpark, Apache Kafka, Hadoop, and Spark Streaming for large-scale data processing integrated with Cassandra and Elasticsearch.',
       'Developed scalable web applications using the Laravel framework.',
       'Collaborated on government-funded projects (Ministry of Electronics and Information Technology, Government of India) focused on data analytics and web development.',
     ],
+    tags: ['PySpark', 'Kafka', 'Hadoop', 'Elasticsearch', 'Cassandra', 'Laravel'],
   },
 ];
 
@@ -100,58 +106,57 @@ export default function About() {
         </div>
       </section>
 
-      {/* Education */}
-      <section className="mb-24">
-        <h2 className="text-3xl font-serif text-ink mb-10">Education</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div className="border border-subtle rounded-2xl p-8 bg-surface/50">
-            <p className="text-xs font-bold uppercase tracking-widest text-accent mb-3">B.Tech</p>
-            <h3 className="text-xl font-medium text-ink mb-1">Computer Engineering</h3>
-            <p className="text-ink/60 font-light">Mizoram University · 2020</p>
-            <p className="text-ink/70 font-light mt-4 text-sm leading-relaxed">
-              Final project: Smart Irrigation System using IoT — designed an IoT-based system with data-driven decision-making, sensors for soil moisture monitoring, and automated water control.
-            </p>
-          </div>
-          <div className="border border-subtle rounded-2xl p-8 bg-surface/50">
-            <p className="text-xs font-bold uppercase tracking-widest text-accent mb-3">Secondary</p>
-            <h3 className="text-xl font-medium text-ink mb-1">Higher Secondary</h3>
-            <p className="text-ink/60 font-light">Catholic School, Canchipur, Manipur · 2013</p>
-            <p className="text-ink/60 font-light mt-2">Manipur Public School · 2015</p>
-          </div>
-        </div>
-      </section>
-
-      {/* Experience Timeline */}
+      {/* Work Experience */}
       <section className="mb-24">
         <h2 className="text-3xl font-serif text-ink mb-10">Work Experience</h2>
-        <div className="relative">
-          <div className="absolute left-0 md:left-6 top-0 bottom-0 w-[1px] bg-subtle hidden md:block" />
-          <div className="space-y-12">
-            {experience.map((job, i) => (
-              <div key={i} className="relative md:pl-16">
-                <div className="hidden md:flex absolute left-0 top-1 w-12 h-12 rounded-full bg-canvas border-2 border-accent items-center justify-center text-accent font-serif font-bold text-lg z-10">
-                  {String(experience.length - i).padStart(2, '0')}
-                </div>
-                <div className="bg-surface/50 border border-subtle rounded-2xl p-8">
-                  <div className="flex flex-col md:flex-row md:items-center justify-between mb-4 gap-2">
-                    <div>
-                      <h3 className="text-xl font-medium text-ink">{job.role}</h3>
-                      <p className="text-accent text-sm uppercase tracking-widest mt-0.5">{job.org}</p>
+        <div className="space-y-5">
+          {experience.map((job, i) => (
+            <div key={i} className="relative group">
+              <div className="border border-subtle rounded-2xl bg-surface/50 overflow-hidden hover:border-accent/30 hover:shadow-sm transition-all duration-300">
+                {/* Accent left bar */}
+                <div className="flex">
+                  <div className={`w-1 flex-shrink-0 ${job.current ? 'bg-accent' : 'bg-subtle group-hover:bg-accent/40 transition-colors'}`} />
+                  <div className="flex-1 p-8">
+                    {/* Header row */}
+                    <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3 mb-5">
+                      <div>
+                        {job.current && (
+                          <span className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest text-accent bg-accent/10 border border-accent/20 px-3 py-1 rounded-full mb-3">
+                            <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
+                            Current Role
+                          </span>
+                        )}
+                        <h3 className="text-xl font-medium text-ink leading-tight">{job.role}</h3>
+                        <p className="text-accent/80 text-sm font-medium mt-1 uppercase tracking-wide">{job.org}</p>
+                      </div>
+                      <span className="flex-shrink-0 text-sm text-ink/50 font-light whitespace-nowrap bg-subtle/60 px-4 py-1.5 rounded-full self-start">
+                        {job.period}
+                      </span>
                     </div>
-                    <span className="text-sm text-ink/50 font-light whitespace-nowrap">{job.period}</span>
+
+                    {/* Bullet points */}
+                    <ul className="space-y-2.5 mb-6">
+                      {job.bullets.map((b, j) => (
+                        <li key={j} className="flex gap-3 text-ink/70 font-light leading-relaxed text-sm">
+                          <span className="text-accent/50 mt-1.5 flex-shrink-0 text-[10px]">◆</span>
+                          <span>{b}</span>
+                        </li>
+                      ))}
+                    </ul>
+
+                    {/* Tech tags */}
+                    <div className="flex flex-wrap gap-2">
+                      {job.tags.map(tag => (
+                        <span key={tag} className="text-xs px-2.5 py-1 rounded-lg border border-subtle bg-canvas/60 text-ink/50 font-medium">
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
                   </div>
-                  <ul className="space-y-2">
-                    {job.bullets.map((b, j) => (
-                      <li key={j} className="flex gap-3 text-ink/70 font-light leading-relaxed text-sm">
-                        <span className="text-accent mt-1.5 flex-shrink-0">–</span>
-                        <span>{b}</span>
-                      </li>
-                    ))}
-                  </ul>
                 </div>
               </div>
-            ))}
-          </div>
+            </div>
+          ))}
         </div>
       </section>
 

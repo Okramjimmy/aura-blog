@@ -12,6 +12,7 @@ import statsRoutes from './server/routes/stats.ts';
 import contactRoutes from './server/routes/contacts.ts';
 import newsletterRoutes from './server/routes/newsletters.ts';
 import githubRoutes from './server/routes/github.ts';
+import pageviewRoutes from './server/routes/pageview.ts';
 
 async function startServer() {
   const app = express();
@@ -50,6 +51,7 @@ async function startServer() {
   app.use('/api/v1/contacts', contactRoutes);
   app.use('/api/v1/newsletters', newsletterRoutes);
   app.use('/api/v1/github', githubRoutes);
+  app.use('/api/v1/pageview', pageviewRoutes);
 
   // --- Catch-all for unknown /api routes — return 404 JSON, not HTML ---
   app.all('/api/*', (req: Request, res: Response) => {
